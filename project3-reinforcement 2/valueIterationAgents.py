@@ -77,19 +77,15 @@ class ValueIterationAgent(ValueEstimationAgent):
           value function stored in self.values.
         """
         "*** YOUR CODE HERE ***"
-<<<<<<< HEAD
-        
-=======
-         if self.mdp.isTerminal(state):
+        if self.mdp.isTerminal(state):
             return self.values[0]
         print(self.mdp.getTransitionStatesAndProbs(state, action)[0])
-        tranProb = self.mdp.getTransitionStatesAndProbs(state, action)[0]
-        reward = self.mdp.getReward(state, action, tranProb[0])
-        q = tranProb[1] * (reward + self.discount*self.getValue(state))
+        for i in range(len(self.mdp.getTransitionStatesAndProbs(state, action))):
+            tranProb = self.mdp.getTransitionStatesAndProbs(state, action)[i]
+            reward = self.mdp.getReward(state, action, tranProb[0])
+            q += tranProb[1] * (reward + self.discount*self.getValue(state))
         self.values[q] +=  1
         return q
-        util.raiseNotDefined()
->>>>>>> 3f6ccbe8f8627cd4d30c8ee4ab96ca06b56c879c
 
     def computeActionFromValues(self, state):
         """
