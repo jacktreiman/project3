@@ -80,11 +80,11 @@ class ValueIterationAgent(ValueEstimationAgent):
         if self.mdp.isTerminal(state):
             return self.values[0]
         print(self.mdp.getTransitionStatesAndProbs(state, action)[0])
-        #for i in range(len(self.mdp.getTransitionStatesAndProbs(state,action))):
-        tranProb = self.mdp.getTransitionStatesAndProbs(state, action)[0]
-        reward = self.mdp.getReward(state, action, tranProb[0])
-        q = tranProb[1] * (reward + self.discount*self.getValue(state))
-        self.values[state] +=  q
+        for nextState, tranProb in range(len(self.mdp.getTransitionStatesAndProbs(state,action))):
+            #tranProb = self.mdp.getTransitionStatesAndProbs(state, action)[0]
+            reward = self.mdp.getReward(state, action, nextState)
+            q = tranProb * (reward + self.discount*self.getValue(nextState))
+            self.values[state] +=  q
         return q
 
     def computeActionFromValues(self, state):
