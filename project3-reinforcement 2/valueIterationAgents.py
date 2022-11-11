@@ -77,14 +77,14 @@ class ValueIterationAgent(ValueEstimationAgent):
           value function stored in self.values.
         """
         "*** YOUR CODE HERE ***"
+        q = 0
         if self.mdp.isTerminal(state):
-            return self.values[0]
-        print(self.mdp.getTransitionStatesAndProbs(state, action)[0])
-        for i in range(len(self.mdp.getTransitionStatesAndProbs(state, action))):
-            tranProb = self.mdp.getTransitionStatesAndProbs(state, action)[i]
-            reward = self.mdp.getReward(state, action, tranProb[0])
-            q += tranProb[1] * (reward + self.discount*self.getValue(state))
-        self.values[q] +=  1
+            return self.values[state]
+        #print(self.mdp.getTransitionStatesAndProbs(state, action)[0])
+        #for i in range(len(self.mdp.getTransitionStatesAndProbs(state, action))):
+        tranProb = self.mdp.getTransitionStatesAndProbs(state, action)[0]
+        reward = self.mdp.getReward(state, action, tranProb[0])
+        q += tranProb[1] * (reward + self.discount*self.getValue(state))
         return q
 
     def computeActionFromValues(self, state):
@@ -97,13 +97,13 @@ class ValueIterationAgent(ValueEstimationAgent):
           terminal state, you should return None.
         """
         "*** YOUR CODE HERE ***"
-<<<<<<< HEAD
-        
-        return 0
-=======
-        return self.values.argMax()
-        util.raiseNotDefined()
->>>>>>> 3f6ccbe8f8627cd4d30c8ee4ab96ca06b56c879c
+        topAction = 'Stop'
+        topValue = 0
+        for i in self.values.keys():
+            if self.values[i] > topValue:
+                topAction = i
+            print(i)
+        return topAction
 
     def getPolicy(self, state):
         return self.computeActionFromValues(state)
