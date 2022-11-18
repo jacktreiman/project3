@@ -63,12 +63,18 @@ class ValueIterationAgent(ValueEstimationAgent):
     def runValueIteration(self):
         # Write value iteration code here
         "*** YOUR CODE HERE ***"
-        state = self.mdp.getStartState()
-        act = None
-        for i in range(self.iterations):
+        for _ in range(self.iterations):
+            values = self.values.copy()
             for j in self.mdp.getStates():
-                act = self.computeActionFromValues(j)
-                self.values[j] = self.computeQValueFromValues(j, act)
+                if self.mdp.isTerminal(j):
+                    values[j] = 0
+                else:
+                    q = -10000000
+                    for action in self.mdp.getPossibleActions(j):
+                        if self.getQValue(j, action) > q:
+                            q = self.getQValue(j, action)
+                    values[j] = q
+            self.values = values
         
 
     def getValue(self, state):
@@ -84,18 +90,10 @@ class ValueIterationAgent(ValueEstimationAgent):
           value function stored in self.values.
         """
         "*** YOUR CODE HERE ***"
-        q = self.values[state]
-        if self.mdp.isTerminal(state):
-            return q
-        #print(self.mdp.getTransitionStatesAndProbs(state, action)[0])
-        #print(self.mdp.getTransitionStatesAndProbs(state,action))
-        if self.mdp.getTransitionStatesAndProbs(state,action):
-            for nextState, tranProb in self.mdp.getTransitionStatesAndProbs(state,action):
-                #tranProb = self.mdp.getTransitionStatesAndProbs(state, action)
-                #print(tranProb)
-                #if nextState in self.mdp.getPossibleActions(state):
-                reward = self.mdp.getReward(state, action, nextState)
-                q += tranProb * (reward + self.discount*self.getValue(nextState))
+        q = 0
+        for nextState, tranProb in self.mdp.getTransitionStatesAndProbs(state,action):
+            reward = self.mdp.getReward(state, action, nextState)
+            q += tranProb * (reward + self.discount*self.getValue(nextState))
         return q
 
     def computeActionFromValues(self, state):
@@ -109,13 +107,14 @@ class ValueIterationAgent(ValueEstimationAgent):
         """
         "*** YOUR CODE HERE ***"
         topAction = None
-        topValue = 0
-        if self.mdp.isTerminal(state):
-            return topAction
-        for action in self.mdp.getPossibleActions(state):
-            if self.computeQValueFromValues(state, action) > topValue:
-                topValue = self.computeQValueFromValues(state, action)
-                topAction = action
+        topValue = -1000000
+        if len(self.mdp.getPossibleActions(state)) == 0:
+            return None
+        else:
+            for action in self.mdp.getPossibleActions(state):
+                if self.getQValue(state, action) > topValue:
+                    topValue = self.getQValue(state, action)
+                    topAction = action
         return topAction
 
     def getPolicy(self, state):
