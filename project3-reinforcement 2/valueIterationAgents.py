@@ -27,6 +27,7 @@
 
 
 import mdp, util
+import copy
 
 from learningAgents import ValueEstimationAgent
 import collections
@@ -62,7 +63,13 @@ class ValueIterationAgent(ValueEstimationAgent):
     def runValueIteration(self):
         # Write value iteration code here
         "*** YOUR CODE HERE ***"
-
+        state = self.mdp.getStartState()
+        act = None
+        for i in range(self.iterations):
+            for j in self.mdp.getStates():
+                act = self.computeActionFromValues(j)
+                self.values[j] = self.computeQValueFromValues(j, act)
+        
 
     def getValue(self, state):
         """
@@ -77,14 +84,18 @@ class ValueIterationAgent(ValueEstimationAgent):
           value function stored in self.values.
         """
         "*** YOUR CODE HERE ***"
+        q = self.values[state]
         if self.mdp.isTerminal(state):
-            return self.values[0]
-        print(self.mdp.getTransitionStatesAndProbs(state, action)[0])
-        #for i in range(len(self.mdp.getTransitionStatesAndProbs(state,action))):
-        tranProb = self.mdp.getTransitionStatesAndProbs(state, action)[0]
-        reward = self.mdp.getReward(state, action, tranProb[0])
-        q = tranProb[1] * (reward + self.discount*self.getValue(state))
-        self.values[state] +=  q
+            return q
+        #print(self.mdp.getTransitionStatesAndProbs(state, action)[0])
+        #print(self.mdp.getTransitionStatesAndProbs(state,action))
+        if self.mdp.getTransitionStatesAndProbs(state,action):
+            for nextState, tranProb in self.mdp.getTransitionStatesAndProbs(state,action):
+                #tranProb = self.mdp.getTransitionStatesAndProbs(state, action)
+                #print(tranProb)
+                #if nextState in self.mdp.getPossibleActions(state):
+                reward = self.mdp.getReward(state, action, nextState)
+                q += tranProb * (reward + self.discount*self.getValue(nextState))
         return q
 
     def computeActionFromValues(self, state):
@@ -97,12 +108,14 @@ class ValueIterationAgent(ValueEstimationAgent):
           terminal state, you should return None.
         """
         "*** YOUR CODE HERE ***"
-        topAction = 'Stop'
+        topAction = None
         topValue = 0
-        for i in self.values.keys():
-            if self.values[i] > topValue:
-                topAction = i
-            print(i)
+        if self.mdp.isTerminal(state):
+            return topAction
+        for action in self.mdp.getPossibleActions(state):
+            if self.computeQValueFromValues(state, action) > topValue:
+                topValue = self.computeQValueFromValues(state, action)
+                topAction = action
         return topAction
 
     def getPolicy(self, state):

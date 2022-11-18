@@ -11,47 +11,20 @@ Values at iteration 0 are correct.
 """
 
 
-Q-Values at iteration 0 for action south are correct.
-   Student/correct solution:
- q_values_k_0_action_south: """
+Q-Values at iteration 0 for action west are NOT correct.
+   Student solution:
+ q_values_k_0_action_west: """
         __________      illegal   __________
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-        __________      illegal   __________
-"""
-
-
-Q-Values at iteration 0 for action exit are correct.
-   Student/correct solution:
- q_values_k_0_action_exit: """
-        __________      10.0000   __________
-         -100.0000      illegal    -100.0000
-         -100.0000      illegal    -100.0000
-         -100.0000      illegal    -100.0000
-         -100.0000      illegal    -100.0000
-         -100.0000      illegal    -100.0000
-        __________       1.0000   __________
-"""
-
-
-Q-Values at iteration 0 for action north are correct.
-   Student/correct solution:
- q_values_k_0_action_north: """
-        __________      illegal   __________
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
+           illegal   -3487.7726      illegal
+           illegal   -2006.1309      illegal
+           illegal   -1134.5770      illegal
+           illegal    -621.8982      illegal
+           illegal    -320.3225      illegal
         __________      illegal   __________
 """
 
 
-Q-Values at iteration 0 for action west are correct.
-   Student/correct solution:
+   Correct solution:
  q_values_k_0_action_west: """
         __________      illegal   __________
            illegal       0.0000      illegal
@@ -63,8 +36,20 @@ Q-Values at iteration 0 for action west are correct.
 """
 
 
-Q-Values at iteration 0 for action east are correct.
-   Student/correct solution:
+Q-Values at iteration 0 for action east are NOT correct.
+   Student solution:
+ q_values_k_0_action_east: """
+        __________      illegal   __________
+           illegal   -3638.4761      illegal
+           illegal   -2086.2800      illegal
+           illegal   -1173.2236      illegal
+           illegal    -636.1315      illegal
+           illegal    -320.1950      illegal
+        __________      illegal   __________
+"""
+
+
+   Correct solution:
  q_values_k_0_action_east: """
         __________      illegal   __________
            illegal       0.0000      illegal
@@ -76,141 +61,78 @@ Q-Values at iteration 0 for action east are correct.
 """
 
 
-Values at iteration 1 are NOT correct.
+Q-Values at iteration 0 for action south are NOT correct.
    Student solution:
- values_k_1: """
-        __________       0.0000   __________
-            0.0000       0.0000       0.0000
-            0.0000       0.0000       0.0000
-            0.0000       0.0000       0.0000
-            0.0000       0.0000       0.0000
-            0.0000       0.0000       0.0000
-        __________       0.0000   __________
+ q_values_k_0_action_south: """
+        __________      illegal   __________
+           illegal   -6359.6383      illegal
+           illegal   -3537.4637      illegal
+           illegal   -1877.3610      illegal
+           illegal    -900.8300      illegal
+           illegal    -326.4000      illegal
+        __________      illegal   __________
 """
 
 
    Correct solution:
- values_k_1: """
+ q_values_k_0_action_south: """
+        __________      illegal   __________
+           illegal       0.0000      illegal
+           illegal       0.0000      illegal
+           illegal       0.0000      illegal
+           illegal       0.0000      illegal
+           illegal       0.0000      illegal
+        __________      illegal   __________
+"""
+
+
+Q-Values at iteration 0 for action north are NOT correct.
+   Student solution:
+ q_values_k_0_action_north: """
+        __________      illegal   __________
+           illegal   -6368.1383      illegal
+           illegal   -3545.9637      illegal
+           illegal   -1885.8610      illegal
+           illegal    -909.3300      illegal
+           illegal    -334.9000      illegal
+        __________      illegal   __________
+"""
+
+
+   Correct solution:
+ q_values_k_0_action_north: """
+        __________      illegal   __________
+           illegal       0.0000      illegal
+           illegal       0.0000      illegal
+           illegal       0.0000      illegal
+           illegal       0.0000      illegal
+           illegal       0.0000      illegal
+        __________      illegal   __________
+"""
+
+
+Q-Values at iteration 0 for action exit are NOT correct.
+   Student solution:
+ q_values_k_0_action_exit: """
+        __________      30.0000   __________
+         -200.0000      illegal    -200.0000
+         -200.0000      illegal    -200.0000
+         -200.0000      illegal    -200.0000
+         -200.0000      illegal    -200.0000
+         -200.0000      illegal    -200.0000
+        __________       3.0000   __________
+"""
+
+
+   Correct solution:
+ q_values_k_0_action_exit: """
         __________      10.0000   __________
-         -100.0000       0.0000    -100.0000
-         -100.0000       0.0000    -100.0000
-         -100.0000       0.0000    -100.0000
-         -100.0000       0.0000    -100.0000
-         -100.0000       0.0000    -100.0000
-        __________       1.0000   __________
-"""
-
-
-Q-Values at iteration 1 for action south are NOT correct.
-   Student solution:
- q_values_k_1_action_south: """
-        __________      illegal   __________
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-        __________      illegal   __________
-"""
-
-
-   Correct solution:
- q_values_k_1_action_south: """
-        __________      illegal   __________
-           illegal      -8.5000      illegal
-           illegal      -8.5000      illegal
-           illegal      -8.5000      illegal
-           illegal      -8.5000      illegal
-           illegal      -7.7350      illegal
-        __________      illegal   __________
-"""
-
-
-Q-Values at iteration 1 for action exit are correct.
-   Student/correct solution:
- q_values_k_1_action_exit: """
-        __________      10.0000   __________
          -100.0000      illegal    -100.0000
          -100.0000      illegal    -100.0000
          -100.0000      illegal    -100.0000
          -100.0000      illegal    -100.0000
          -100.0000      illegal    -100.0000
         __________       1.0000   __________
-"""
-
-
-Q-Values at iteration 1 for action north are NOT correct.
-   Student solution:
- q_values_k_1_action_north: """
-        __________      illegal   __________
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-        __________      illegal   __________
-"""
-
-
-   Correct solution:
- q_values_k_1_action_north: """
-        __________      illegal   __________
-           illegal      -0.8500      illegal
-           illegal      -8.5000      illegal
-           illegal      -8.5000      illegal
-           illegal      -8.5000      illegal
-           illegal      -8.5000      illegal
-        __________      illegal   __________
-"""
-
-
-Q-Values at iteration 1 for action west are NOT correct.
-   Student solution:
- q_values_k_1_action_west: """
-        __________      illegal   __________
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-        __________      illegal   __________
-"""
-
-
-   Correct solution:
- q_values_k_1_action_west: """
-        __________      illegal   __________
-           illegal     -76.0750      illegal
-           illegal     -76.5000      illegal
-           illegal     -76.5000      illegal
-           illegal     -76.5000      illegal
-           illegal     -76.4575      illegal
-        __________      illegal   __________
-"""
-
-
-Q-Values at iteration 1 for action east are NOT correct.
-   Student solution:
- q_values_k_1_action_east: """
-        __________      illegal   __________
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-           illegal       0.0000      illegal
-        __________      illegal   __________
-"""
-
-
-   Correct solution:
- q_values_k_1_action_east: """
-        __________      illegal   __________
-           illegal     -76.0750      illegal
-           illegal     -76.5000      illegal
-           illegal     -76.5000      illegal
-           illegal     -76.5000      illegal
-           illegal     -76.4575      illegal
-        __________      illegal   __________
 """
 
 
