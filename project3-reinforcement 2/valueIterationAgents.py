@@ -85,7 +85,7 @@ class ValueIterationAgent(ValueEstimationAgent):
         """
         "*** YOUR CODE HERE ***"
         q = self.values[state]
-        if self.mdp.isTerminal(state):
+        if self.mdp.isTerminal(state): #heee
             return q
         #print(self.mdp.getTransitionStatesAndProbs(state, action)[0])
         #print(self.mdp.getTransitionStatesAndProbs(state,action))
