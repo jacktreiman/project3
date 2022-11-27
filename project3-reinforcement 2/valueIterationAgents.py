@@ -155,6 +155,19 @@ class AsynchronousValueIterationAgent(ValueIterationAgent):
         ValueIterationAgent.__init__(self, mdp, discount, iterations)
 
     def runValueIteration(self):
+        for i in range(self.iterations):
+            values = self.values.copy()
+            j = self.mdp.getStates()
+            curr = j[i%len(j)]
+            if self.mdp.isTerminal(curr):
+                values[curr] = 0
+            else:
+                q = -10000000
+                for action in self.mdp.getPossibleActions(curr):
+                    if self.getQValue(curr, action) > q:
+                        q = self.getQValue(curr, action)
+                values[curr] = q
+            self.values = values
         "*** YOUR CODE HERE ***"
 
 class PrioritizedSweepingValueIterationAgent(AsynchronousValueIterationAgent):
@@ -176,4 +189,16 @@ class PrioritizedSweepingValueIterationAgent(AsynchronousValueIterationAgent):
 
     def runValueIteration(self):
         "*** YOUR CODE HERE ***"
+        predecessors = {}
+        priQue = util.PriorityQueue()
+        for i in self.mdp.getStates():
+            for j in self.mdp.getStates():
+                if self.mdp.isTerminal(j):
+                    print('hi')
+                else:
+                    for k in self.mdp.getPossibleActions(j):
+                        for state, action in self.mdp.getTransitionStatesAndProbs(j, k):
+                            if state is i:
+                                predecessors[i].append(state)
+        print(predecessors)  
 
