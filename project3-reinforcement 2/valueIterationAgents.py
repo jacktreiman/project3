@@ -219,7 +219,7 @@ class PrioritizedSweepingValueIterationAgent(AsynchronousValueIterationAgent):
                 for k in self.mdp.getPossibleActions(i):
                     for state, prob in self.mdp.getTransitionStatesAndProbs(i,k):
                         if state in predecessors:
-                            predecessors[state] += i
+                            predecessors[state].append(i)
                         else:
                             predecessors[state] = [i]
         
