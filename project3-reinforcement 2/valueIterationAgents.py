@@ -204,15 +204,7 @@ class PrioritizedSweepingValueIterationAgent(AsynchronousValueIterationAgent):
         # print(predecessors) 
         predecessors = {}
         priQue = util.PriorityQueue()
-        # for i in self.mdp.getStates():
-        #     for j in self.mdp.getStates():
-        #         if self.mdp.isTerminal(j):
-        #             print('hi')
-        #         else:
-        #             for k in self.mdp.getPossibleActions(j):
-        #                 for state, action in self.mdp.getTransitionStatesAndProbs(j, k):
-        #                     if state is i:
-        #                         predecessors[i].append(state)
+
 
         for i in self.mdp.getStates():
             if not self.mdp.isTerminal(i):
@@ -224,28 +216,32 @@ class PrioritizedSweepingValueIterationAgent(AsynchronousValueIterationAgent):
                             predecessors[state] = {i}
         for i in self.mdp.getStates():
             if not self.mdp.isTerminal(i):
-                maxAct = self.getPolicy(i)
-                maxQ = self.getQValue(i, maxAct)
-                diff = abs(self.values[i] - maxQ)
-                priQue.push(i, -diff)
+                q = -100000
+                for action in self.mdp.getPossibleActions(i):
+                    if self.getQValue(i, action) > q:
+                        q = self.getQValue(i, action)
+                diff = abs(self.values[i] - q)
+                priQue.update(i, -diff)
         
         for _ in range(self.iterations):
             if priQue.isEmpty():
-                return
+                break
             else:
                 s = priQue.pop()
-                values = self.values.copy()
-                q = values[s]
-                for action in self.mdp.getPossibleActions(s):
-                    if self.getQValue(s, action) > q:
-                        q = self.getQValue(s, action)
-                self.values[s] = q
+                if not self.mdp.isTerminal(s):
+                    q = -1000000
+                    for action in self.mdp.getPossibleActions(s):
+                        if self.getQValue(s, action) > q:
+                            q = self.getQValue(s, action)
+                    self.values[s] = q
                 for pred in predecessors[s]:
-                    maxAct = self.getPolicy(pred)
-                    maxQ = self.getQValue(pred, maxAct)
-                    diff = abs(self.values[pred] - maxQ)
-                    if diff > self.theta:
-                        priQue.update(pred, -diff)
+                    if not self.mdp.isTerminal(pred):
+                        q = -1000000
+                        for action in self.mdp.getPossibleActions(pred):
+                            if self.getQValue(pred, action) > q:
+                                q = self.getQValue(pred, action)
+                        diff = abs(self.values[pred] - q)
+                        if diff > self.theta:
+                            priQue.update(pred, -diff)
 
         
-        print(predecessors)
