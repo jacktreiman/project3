@@ -201,5 +201,26 @@ class PrioritizedSweepingValueIterationAgent(AsynchronousValueIterationAgent):
                             for state, action in self.mdp.getTransitionStatesAndProbs(j, k):
                                 if state is i:
                                     predecessors[i] += state
-        print(predecessors)  
+        print(predecessors) 
+         predecessors = {}
+        priQue = util.PriorityQueue()
+        # for i in self.mdp.getStates():
+        #     for j in self.mdp.getStates():
+        #         if self.mdp.isTerminal(j):
+        #             print('hi')
+        #         else:
+        #             for k in self.mdp.getPossibleActions(j):
+        #                 for state, action in self.mdp.getTransitionStatesAndProbs(j, k):
+        #                     if state is i:
+        #                         predecessors[i].append(state)
+
+        for i in self.mdp.getStates():
+            for k in self.mdp.getPossibleActions(i):
+                for state, prob in self.mdp.getTransitionStatesAndProbs(i,k):
+                    if state in predecessors:
+                        None
+                    else:
+                        predecessors[state] = i
+
+        print(predecessors)
 
